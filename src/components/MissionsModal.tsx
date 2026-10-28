@@ -32,8 +32,8 @@ export const MissionsModal: React.FC<MissionsModalProps> = ({
   const totalCompleted = Object.values(completedMissions).filter(Boolean).length;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75">
-      <div className="w-full max-w-2xl bg-[#190c33] border-2 border-purple-500/50 rounded-3xl p-6 text-white shadow-2xl flex flex-col max-h-[90vh]">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-2.5 sm:p-4 bg-black/75">
+      <div className="w-full max-w-2xl bg-[#190c33] border-2 border-purple-500/50 rounded-2xl sm:rounded-3xl p-4 sm:p-6 text-white shadow-2xl flex flex-col max-h-[90dvh]">
         {/* Header */}
         <div className="flex items-center justify-between pb-3 border-b border-purple-800/60">
           <div>

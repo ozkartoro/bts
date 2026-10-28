@@ -28,8 +28,8 @@ export const PauseModal: React.FC<PauseModalProps> = ({
   const baseThreshold = bloomConfig?.baseThreshold ?? 0.22;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80">
-      <div className="w-full max-w-md bg-[#190c33] border-2 border-purple-500/60 rounded-3xl p-6 text-white shadow-2xl space-y-5 max-h-[92vh] overflow-y-auto">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-2.5 sm:p-4 bg-black/80">
+      <div className="w-full max-w-md bg-[#190c33] border-2 border-purple-500/60 rounded-2xl sm:rounded-3xl p-4 sm:p-6 text-white shadow-2xl space-y-4 sm:space-y-5 max-h-[92dvh] overflow-y-auto">
         {/* Header */}
         <div className="flex items-center justify-between pb-3 border-b border-purple-800/60">
           <div>

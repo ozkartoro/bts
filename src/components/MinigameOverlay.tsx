@@ -162,8 +162,8 @@ export const MinigameOverlay: React.FC<MinigameOverlayProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80">
-      <div className="relative w-full max-w-lg bg-[#180f2d] border-2 border-purple-500/70 rounded-3xl p-6 shadow-2xl text-white">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-2.5 sm:p-4 bg-black/80">
+      <div className="relative w-full max-w-lg bg-[#180f2d] border-2 border-purple-500/70 rounded-2xl sm:rounded-3xl p-4 sm:p-6 shadow-2xl text-white max-h-[92dvh] overflow-y-auto">
         {/* Header */}
         <div className="flex items-center justify-between pb-3 border-b border-purple-800/60">
           <div className="flex items-center gap-3">

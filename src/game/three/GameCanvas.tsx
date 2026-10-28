@@ -161,7 +161,7 @@ const GameScene: React.FC<GameSceneProps> = ({
   onTargetsCollected,
   onBloomDynamicChange
 }) => {
-  const { scene, camera, gl } = useThree();
+  const { scene, camera, gl, size } = useThree();
 
   const characterRigRef = useRef<CharacterRig | null>(null);
   const playerBodyRef = useRef<RapierRigidBody | null>(null);
@@ -653,9 +653,25 @@ const GameScene: React.FC<GameSceneProps> = ({
     // Update rig animation
     rig.updateAnimation(currentAnim, time, dt);
 
-    // Third Person Camera Follow
-    const camDist = 5.2;
-    const camHeight = 3.2;
+    // Adaptive Camera framing for Portrait vs Landscape
+    const aspect = size.width / Math.max(1, size.height);
+    const isPortrait = aspect < 1.0;
+    const portraitFactor = isPortrait ? Math.min(1, (1 - aspect) * 1.6) : 0;
+
+    // In portrait, dynamically expand vertical FOV so the horizontal FOV remains broad and spacious
+    const targetFov = isPortrait
+      ? Math.min(76, 52 / Math.pow(Math.max(0.4, aspect), 0.65))
+      : 52;
+
+    const pCam = camera as THREE.PerspectiveCamera;
+    if (pCam.isPerspectiveCamera && Math.abs(pCam.fov - targetFov) > 0.1) {
+      pCam.fov = THREE.MathUtils.lerp(pCam.fov, targetFov, Math.min(1, 10 * dt));
+      pCam.updateProjectionMatrix();
+    }
+
+    // Third Person Camera Follow - dynamically adjust distance and height
+    const camDist = 5.2 + portraitFactor * 1.8;
+    const camHeight = 3.2 + portraitFactor * 0.8;
     const camAngle = mouseYawRef.current;
 
     const { targetCamPos, camLookAt } = mathRef.current;
@@ -666,7 +682,7 @@ const GameScene: React.FC<GameSceneProps> = ({
     );
 
     camera.position.lerp(targetCamPos, Math.min(1, 8 * dt));
-    camLookAt.set(playerPos.x, playerPos.y + 1.2, playerPos.z);
+    camLookAt.set(playerPos.x, playerPos.y + 1.2 - portraitFactor * 0.2, playerPos.z);
     camera.lookAt(camLookAt);
 
     // Proximity check for interactives and portals
@@ -798,12 +814,16 @@ export const GameCanvas: React.FC<GameCanvasProps> = (props) => {
     isMouseDownRef.current = false;
   };
 
-  // Mobile Touch Controls for Camera Orbit (avoiding virtual joystick on bottom-left)
+  // Mobile Touch Controls for Camera Orbit (avoiding virtual controls at bottom)
   const onTouchStart = (e: React.TouchEvent) => {
     for (let i = 0; i < e.changedTouches.length; i++) {
       const t = e.changedTouches[i];
-      const isJoystickZone = t.clientX < window.innerWidth * 0.45 && t.clientY > window.innerHeight * 0.55;
-      if (!isJoystickZone && touchIdRef.current === null) {
+      // Exclude touches in the bottom control zones (joystick, dock, action buttons)
+      const isBottomControlsZone =
+        t.clientY > window.innerHeight * 0.58 &&
+        (t.clientX < window.innerWidth * 0.40 || t.clientX > window.innerWidth * 0.60 || t.clientY > window.innerHeight * 0.80);
+
+      if (!isBottomControlsZone && touchIdRef.current === null) {
         touchIdRef.current = t.identifier;
         lastMouseXRef.current = t.clientX;
         break;

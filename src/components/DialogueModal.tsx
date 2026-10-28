@@ -23,8 +23,11 @@ export const DialogueModal: React.FC<DialogueModalProps> = ({
   onClose
 }) => {
   return (
-    <div className="fixed inset-x-4 bottom-6 md:inset-x-auto md:left-1/2 md:-translate-x-1/2 md:w-[600px] z-50 pointer-events-auto">
-      <div className="bg-[#190c33]/95 border-2 border-purple-500/80 rounded-3xl p-5 shadow-2xl text-white">
+    <div
+      className="fixed inset-x-3 sm:inset-x-4 md:inset-x-auto md:left-1/2 md:-translate-x-1/2 md:w-[600px] z-50 pointer-events-auto max-h-[85dvh] overflow-y-auto"
+      style={{ bottom: 'max(0.75rem, env(safe-area-inset-bottom, 12px))' }}
+    >
+      <div className="bg-[#190c33]/95 border-2 border-purple-500/80 rounded-2xl sm:rounded-3xl p-3.5 sm:p-5 shadow-2xl text-white">
         {/* Speaker Name Tag */}
         <div className="flex items-center justify-between mb-2 pb-2 border-b border-purple-800/60">
           <div className="flex items-center gap-2">

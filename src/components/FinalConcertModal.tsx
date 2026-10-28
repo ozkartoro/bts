@@ -45,8 +45,8 @@ export const FinalConcertModal: React.FC<FinalConcertModalProps> = ({
   }, []);
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85">
-      <div className="w-full max-w-xl bg-gradient-to-b from-[#24104d] via-[#1a0c36] to-[#120626] border-2 border-yellow-400/80 rounded-3xl p-6 md:p-8 text-white shadow-2xl text-center relative overflow-hidden">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-2.5 sm:p-4 bg-black/85">
+      <div className="w-full max-w-xl bg-gradient-to-b from-[#24104d] via-[#1a0c36] to-[#120626] border-2 border-yellow-400/80 rounded-2xl sm:rounded-3xl p-4 sm:p-6 md:p-8 text-white shadow-2xl text-center relative max-h-[92dvh] overflow-y-auto">
         {/* Glow Effects */}
         <div className="absolute -top-24 left-1/2 -translate-x-1/2 w-72 h-72 bg-purple-500/30 rounded-full blur-3xl pointer-events-none" />
 

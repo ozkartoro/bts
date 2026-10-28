@@ -269,7 +269,7 @@ export default function App() {
   const starCount = Object.values(progress.stars).filter(Boolean).length;
 
   return (
-    <div className="relative w-screen h-screen overflow-hidden bg-black select-none font-sans">
+    <div className="fixed inset-0 w-full h-full h-[100dvh] max-h-[100dvh] overflow-hidden bg-black select-none font-sans">
       {/* 3D WebGL Canvas Layer */}
       <GameCanvas
         currentWorld={progress.currentWorld}

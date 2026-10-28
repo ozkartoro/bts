@@ -61,28 +61,36 @@ export const HUD: React.FC<HUDProps> = ({
   };
 
   return (
-    <div className="absolute inset-0 pointer-events-none z-20 flex flex-col justify-between p-4 md:p-6 select-none">
+    <div
+      className="fixed inset-0 pointer-events-none z-20 flex flex-col justify-between select-none"
+      style={{
+        paddingTop: 'max(0.75rem, env(safe-area-inset-top, 12px))',
+        paddingBottom: 'max(0.75rem, env(safe-area-inset-bottom, 12px))',
+        paddingLeft: 'max(0.75rem, env(safe-area-inset-left, 12px))',
+        paddingRight: 'max(0.75rem, env(safe-area-inset-right, 12px))',
+      }}
+    >
       {/* Top Bar */}
-      <div className="flex items-start justify-between gap-4">
+      <div className="flex items-start justify-between gap-2 sm:gap-4 w-full">
         {/* Mari Profile & Stars Tracker */}
-        <div className="pointer-events-auto flex flex-col gap-2">
-          <div className="flex items-center gap-3 bg-[#190c33]/90 border border-purple-500/40 rounded-2xl p-2.5 shadow-lg backdrop-blur-none">
+        <div className="pointer-events-auto flex flex-col gap-1.5 sm:gap-2">
+          <div className="flex items-center gap-2 sm:gap-3 bg-[#190c33]/90 border border-purple-500/40 rounded-xl sm:rounded-2xl p-1.5 sm:p-2.5 shadow-lg backdrop-blur-sm">
             <div
-              className="w-11 h-11 rounded-xl flex items-center justify-center font-bold text-white shadow-inner text-base border-2 border-purple-300"
+              className="w-8 h-8 sm:w-11 sm:h-11 rounded-lg sm:rounded-xl flex items-center justify-center font-bold text-white shadow-inner text-xs sm:text-base border border-purple-300 shrink-0"
               style={{ backgroundColor: customization.shirtColor }}
             >
               {customization.shirtLogo}
             </div>
             <div>
-              <div className="flex items-center gap-1.5">
-                <span className="font-bold text-sm text-purple-100">Mari</span>
-                <span className="text-[10px] font-semibold bg-purple-500/30 text-purple-300 px-1.5 py-0.5 rounded-full border border-purple-400/30">
+              <div className="flex items-center gap-1 sm:gap-1.5">
+                <span className="font-bold text-xs sm:text-sm text-purple-100">Mari</span>
+                <span className="text-[9px] sm:text-[10px] font-semibold bg-purple-500/30 text-purple-300 px-1.5 py-0.2 rounded-full border border-purple-400/30">
                   ARMY
                 </span>
               </div>
-              <div className="flex items-center gap-1.5 mt-0.5">
-                <span className="text-xs text-purple-300/90 font-medium">Estrellas:</span>
-                <span className="text-xs font-bold font-mono text-yellow-300 tabular-nums">
+              <div className="flex items-center gap-1 mt-0.5">
+                <span className="text-[10px] sm:text-xs text-purple-300/90 font-medium">Estrellas:</span>
+                <span className="text-[10px] sm:text-xs font-bold font-mono text-yellow-300 tabular-nums">
                   {starCount} / 7
                 </span>
               </div>
@@ -90,14 +98,14 @@ export const HUD: React.FC<HUDProps> = ({
           </div>
 
           {/* 7 Member Star Icons Cluster */}
-          <div className="flex items-center gap-1 bg-[#190c33]/80 border border-purple-600/30 rounded-xl p-1.5 shadow-md">
+          <div className="flex items-center gap-0.5 sm:gap-1 bg-[#190c33]/80 border border-purple-600/30 rounded-lg sm:rounded-xl p-1 sm:p-1.5 shadow-md">
             {STAR_LIST.map((star) => {
               const collected = collectedStars[star.id];
               return (
                 <div
                   key={star.id}
                   title={`${star.name} (${star.member}) - ${collected ? 'Recuperada' : 'Sellada'}`}
-                  className={`w-7 h-7 rounded-lg flex items-center justify-center text-xs transition-all ${
+                  className={`w-5 h-5 sm:w-7 sm:h-7 rounded-md sm:rounded-lg flex items-center justify-center text-[10px] sm:text-xs transition-all ${
                     collected
                       ? 'bg-purple-600/60 border border-yellow-300/80 shadow-sm shadow-yellow-400/40 scale-105'
                       : 'bg-purple-950/60 border border-purple-800/40 opacity-40 grayscale'
@@ -111,19 +119,19 @@ export const HUD: React.FC<HUDProps> = ({
         </div>
 
         {/* Top-Right: World Badge & Controls */}
-        <div className="pointer-events-auto flex flex-col items-end gap-2">
-          <div className="flex items-center gap-2">
-            <div className="flex items-center gap-2 bg-[#190c33]/90 border border-purple-500/40 rounded-2xl px-3.5 py-2 shadow-lg">
-              <Compass className="w-4 h-4 text-purple-400" />
-              <span className="text-xs md:text-sm font-semibold text-purple-100">{getWorldName()}</span>
+        <div className="pointer-events-auto flex flex-col items-end gap-1.5 sm:gap-2">
+          <div className="flex items-center gap-1 sm:gap-2">
+            <div className="flex items-center gap-1.5 sm:gap-2 bg-[#190c33]/90 border border-purple-500/40 rounded-xl sm:rounded-2xl px-2 sm:px-3.5 py-1 sm:py-2 shadow-lg max-w-[130px] xs:max-w-[170px] sm:max-w-none">
+              <Compass className="w-3.5 h-3.5 text-purple-400 shrink-0" />
+              <span className="text-[11px] sm:text-xs md:text-sm font-semibold text-purple-100 truncate">{getWorldName()}</span>
             </div>
 
             <button
               onClick={handleToggleSound}
-              className="w-10 h-10 rounded-2xl bg-[#190c33]/90 border border-purple-500/40 flex items-center justify-center text-purple-300 hover:text-white hover:bg-purple-800/50 transition shadow-lg"
+              className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl sm:rounded-2xl bg-[#190c33]/90 border border-purple-500/40 flex items-center justify-center text-purple-300 hover:text-white hover:bg-purple-800/50 transition shadow-lg shrink-0"
               title={isMuted ? 'Activar sonido' : 'Silenciar sonido'}
             >
-              {isMuted ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4" />}
+              {isMuted ? <VolumeX className="w-3.5 h-3.5 sm:w-4 sm:h-4" /> : <Volume2 className="w-3.5 h-3.5 sm:w-4 sm:h-4" />}
             </button>
 
             <button
@@ -131,32 +139,32 @@ export const HUD: React.FC<HUDProps> = ({
                 sound.playClick();
                 onOpenPause();
               }}
-              className="w-10 h-10 rounded-2xl bg-[#190c33]/90 border border-purple-500/40 flex items-center justify-center text-purple-300 hover:text-white hover:bg-purple-800/50 transition shadow-lg"
+              className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl sm:rounded-2xl bg-[#190c33]/90 border border-purple-500/40 flex items-center justify-center text-purple-300 hover:text-white hover:bg-purple-800/50 transition shadow-lg shrink-0"
               title="Menú y Pausa"
             >
-              <Menu className="w-4 h-4" />
+              <Menu className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
             </button>
           </div>
 
           {/* Current Mission Pill */}
           {currentMission && (
-            <div className="bg-[#190c33]/90 border border-purple-500/40 rounded-2xl p-2.5 max-w-xs text-right shadow-lg">
-              <div className="flex items-center justify-end gap-1.5 text-xs font-bold text-yellow-300">
-                <Sparkles className="w-3.5 h-3.5 text-yellow-400" />
-                <span>{currentMission.name}</span>
+            <div className="bg-[#190c33]/90 border border-purple-500/40 rounded-xl sm:rounded-2xl p-1.5 sm:p-2.5 max-w-[180px] xs:max-w-[220px] sm:max-w-xs text-right shadow-lg">
+              <div className="flex items-center justify-end gap-1 sm:gap-1.5 text-[10px] sm:text-xs font-bold text-yellow-300">
+                <Sparkles className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-yellow-400 shrink-0" />
+                <span className="truncate">{currentMission.name}</span>
                 <button
                   onClick={() => setShowHint(!showHint)}
-                  className="text-purple-400 hover:text-white ml-1"
+                  className="text-purple-400 hover:text-white ml-0.5 sm:ml-1"
                   title="Ver pista"
                 >
-                  <HelpCircle className="w-3.5 h-3.5" />
+                  <HelpCircle className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
                 </button>
               </div>
-              <p className="text-[11px] text-purple-200/90 mt-0.5 line-clamp-2">
+              <p className="text-[10px] sm:text-[11px] text-purple-200/90 mt-0.5 line-clamp-2">
                 {currentMission.objective}
               </p>
               {showHint && (
-                <div className="mt-1.5 text-[10px] text-sky-300 bg-purple-950/80 p-1.5 rounded-lg border border-purple-700/50 text-left">
+                <div className="mt-1 text-[9px] sm:text-[10px] text-sky-300 bg-purple-950/80 p-1.5 rounded-lg border border-purple-700/50 text-left">
                   💡 <span className="font-semibold">Pista:</span> {currentMission.hint}
                 </div>
               )}
@@ -167,33 +175,33 @@ export const HUD: React.FC<HUDProps> = ({
 
       {/* Center Interactive Prompt when near portal/item */}
       {nearInteractiveName && (
-        <div className="pointer-events-auto self-center mb-6">
+        <div className="pointer-events-auto self-center mb-2 sm:mb-4">
           <button
             onClick={() => {
               sound.playClick();
               onTriggerInteraction();
             }}
-            className="flex items-center gap-3 px-6 py-3.5 rounded-2xl bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 border border-yellow-300/80 text-white font-bold shadow-2xl shadow-purple-900/60 active:scale-95 transition-transform"
+            className="flex items-center gap-2 sm:gap-3 px-4 sm:px-6 py-2 sm:py-3.5 rounded-xl sm:rounded-2xl bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 border border-yellow-300/80 text-white font-bold shadow-2xl active:scale-95 transition-transform text-xs sm:text-sm md:text-base"
           >
-            <span className="px-2 py-0.5 rounded-lg bg-black/40 text-xs font-mono border border-white/30 hidden sm:inline">
+            <span className="px-2 py-0.5 rounded-lg bg-black/40 text-[10px] sm:text-xs font-mono border border-white/30 hidden sm:inline">
               E
             </span>
-            <span className="text-sm md:text-base">Interactuar con {nearInteractiveName}</span>
+            <span>Interactuar con {nearInteractiveName}</span>
           </button>
         </div>
       )}
 
       {/* Bottom Unified Control Dock */}
-      <div className="pointer-events-auto self-center flex items-center gap-2 bg-[#190c33]/90 border border-purple-500/50 rounded-2xl p-1.5 shadow-2xl">
+      <div className="pointer-events-auto self-center flex items-center gap-1 sm:gap-2 bg-[#190c33]/90 border border-purple-500/50 rounded-xl sm:rounded-2xl p-1 sm:p-1.5 shadow-2xl mb-0.5 sm:mb-1">
         <button
           onClick={() => {
             sound.playClick();
             onOpenInventory();
           }}
-          className="flex items-center gap-1.5 px-3 py-2 rounded-xl text-purple-200 hover:text-white hover:bg-purple-800/40 text-xs font-semibold transition"
+          className="flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-3 py-1.5 sm:py-2 rounded-lg sm:rounded-xl text-purple-200 hover:text-white hover:bg-purple-800/40 text-xs font-semibold transition"
           title="Inventario (I)"
         >
-          <Backpack className="w-4 h-4 text-pink-400" />
+          <Backpack className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-pink-400" />
           <span className="hidden sm:inline">Inventario</span>
         </button>
 
@@ -202,10 +210,10 @@ export const HUD: React.FC<HUDProps> = ({
             sound.playClick();
             onOpenMissions();
           }}
-          className="flex items-center gap-1.5 px-3 py-2 rounded-xl text-purple-200 hover:text-white hover:bg-purple-800/40 text-xs font-semibold transition"
+          className="flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-3 py-1.5 sm:py-2 rounded-lg sm:rounded-xl text-purple-200 hover:text-white hover:bg-purple-800/40 text-xs font-semibold transition"
           title="Diario de Misiones (M)"
         >
-          <Compass className="w-4 h-4 text-sky-400" />
+          <Compass className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-sky-400" />
           <span className="hidden sm:inline">Misiones</span>
         </button>
 
@@ -214,10 +222,10 @@ export const HUD: React.FC<HUDProps> = ({
             sound.playClick();
             onOpenCustomizer();
           }}
-          className="flex items-center gap-1.5 px-3 py-2 rounded-xl text-purple-200 hover:text-white hover:bg-purple-800/40 text-xs font-semibold transition"
+          className="flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-3 py-1.5 sm:py-2 rounded-lg sm:rounded-xl text-purple-200 hover:text-white hover:bg-purple-800/40 text-xs font-semibold transition"
           title="Personalizar a Mari (C)"
         >
-          <User className="w-4 h-4 text-purple-400" />
+          <User className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-purple-400" />
           <span className="hidden sm:inline">Estilo</span>
         </button>
 
@@ -226,15 +234,15 @@ export const HUD: React.FC<HUDProps> = ({
             sound.playClick();
             onToggleDance();
           }}
-          className={`flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold transition ${
+          className={`flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-3 py-1.5 sm:py-2 rounded-lg sm:rounded-xl text-xs font-semibold transition ${
             isDancing
               ? 'bg-pink-600 text-white'
               : 'text-purple-200 hover:text-white hover:bg-purple-800/40'
           }`}
           title="Bailar coreografía (B)"
         >
-          <Sparkles className="w-4 h-4 text-yellow-300" />
-          <span>{isDancing ? 'Detener Baile' : 'Bailar'}</span>
+          <Sparkles className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-yellow-300" />
+          <span>{isDancing ? 'Detener' : 'Bailar'}</span>
         </button>
       </div>
     </div>

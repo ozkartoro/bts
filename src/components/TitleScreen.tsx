@@ -31,7 +31,15 @@ export const TitleScreen: React.FC<TitleScreenProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex flex-col justify-between p-6 md:p-12 bg-gradient-to-b from-[#090314] via-[#16082c] to-[#250d47] text-white select-none overflow-hidden">
+    <div
+      className="fixed inset-0 z-50 flex flex-col justify-between overflow-y-auto overflow-x-hidden bg-gradient-to-b from-[#090314] via-[#16082c] to-[#250d47] text-white select-none"
+      style={{
+        paddingTop: 'max(0.75rem, env(safe-area-inset-top, 12px))',
+        paddingBottom: 'max(0.75rem, env(safe-area-inset-bottom, 12px))',
+        paddingLeft: 'max(1rem, env(safe-area-inset-left, 16px))',
+        paddingRight: 'max(1rem, env(safe-area-inset-right, 16px))',
+      }}
+    >
       {/* Background Decorative Cosmic Glow and Floating Stars */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden opacity-40">
         <div className="absolute -top-32 -left-32 w-96 h-96 bg-purple-600/30 rounded-full blur-3xl animate-pulse" />
@@ -41,24 +49,24 @@ export const TitleScreen: React.FC<TitleScreenProps> = ({
 
       {/* Top Header */}
       <div className="relative z-10 flex items-center justify-between">
-        <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-purple-950/60 border border-purple-500/30 text-purple-200 text-xs font-semibold">
-          <Sparkles className="w-3.5 h-3.5 text-yellow-300" />
+        <div className="flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full bg-purple-950/60 border border-purple-500/30 text-purple-200 text-[11px] sm:text-xs font-semibold">
+          <Sparkles className="w-3 sm:w-3.5 h-3 sm:h-3.5 text-yellow-300" />
           <span>Experiencia 3D Interactiva ARMY</span>
         </div>
 
         <button
           onClick={toggleSound}
-          className="p-2.5 rounded-2xl bg-purple-950/60 border border-purple-500/40 text-purple-300 hover:text-white hover:bg-purple-800/40 transition"
+          className="p-2 sm:p-2.5 rounded-xl sm:rounded-2xl bg-purple-950/60 border border-purple-500/40 text-purple-300 hover:text-white hover:bg-purple-800/40 transition"
           title={isMuted ? 'Activar música' : 'Silenciar música'}
         >
-          {isMuted ? <VolumeX className="w-5 h-5" /> : <Volume2 className="w-5 h-5" />}
+          {isMuted ? <VolumeX className="w-4 sm:w-5 h-4 sm:h-5" /> : <Volume2 className="w-4 sm:w-5 h-4 sm:h-5" />}
         </button>
       </div>
 
       {/* Center Lockup: Bespoke inline SVG Title Lockup */}
-      <div className="relative z-10 flex flex-col items-center text-center my-auto max-w-2xl mx-auto">
+      <div className="relative z-10 flex flex-col items-center text-center my-auto max-w-2xl mx-auto py-2 sm:py-4">
         {/* Bespoke SVG Title Lockup */}
-        <div className="w-full max-w-lg mb-4">
+        <div className="w-full max-w-[280px] xs:max-w-xs sm:max-w-md md:max-w-lg mb-2 sm:mb-4">
           <svg viewBox="0 0 600 140" className="w-full h-auto drop-shadow-2xl">
             <defs>
               <linearGradient id="titleGrad" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -124,17 +132,17 @@ export const TitleScreen: React.FC<TitleScreenProps> = ({
           </svg>
         </div>
 
-        <p className="text-purple-200 text-sm md:text-base max-w-md mx-auto mb-8 font-light">
+        <p className="text-purple-200 text-xs sm:text-sm md:text-base max-w-md mx-auto mb-3 sm:mb-6 font-light px-2">
           Acompaña a Mari al universo musical para resolver acertijos, recuperar las 7 estrellas de los integrantes y encender el gran concierto.
         </p>
 
         {/* CTA Buttons */}
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-3.5 w-full max-w-sm">
+        <div className="flex flex-row items-center justify-center gap-2.5 sm:gap-3.5 w-full max-w-md px-2">
           <button
             onClick={handleStart}
-            className="w-full sm:w-auto flex-1 flex items-center justify-center gap-2 py-4 px-8 rounded-2xl bg-gradient-to-r from-purple-500 via-pink-500 to-amber-400 hover:from-purple-600 hover:via-pink-600 hover:to-amber-500 text-white font-extrabold text-base shadow-xl shadow-purple-900/50 hover:scale-105 active:scale-95 transition-all"
+            className="flex-1 flex items-center justify-center gap-2 py-3 px-4 sm:py-4 sm:px-8 rounded-xl sm:rounded-2xl bg-gradient-to-r from-purple-500 via-pink-500 to-amber-400 hover:from-purple-600 hover:via-pink-600 hover:to-amber-500 text-white font-extrabold text-xs sm:text-sm md:text-base shadow-xl shadow-purple-900/50 hover:scale-105 active:scale-95 transition-all"
           >
-            <Play className="w-5 h-5 fill-white" />
+            <Play className="w-4 sm:w-5 h-4 sm:h-5 fill-white" />
             <span>{hasSavedProgress ? 'Continuar Partida' : 'Comenzar Aventura'}</span>
           </button>
 
@@ -143,11 +151,10 @@ export const TitleScreen: React.FC<TitleScreenProps> = ({
               sound.playClick();
               onOpenCustomizer();
             }}
-            className="w-full sm:w-auto p-4 rounded-2xl bg-purple-900/50 hover:bg-purple-800/60 border border-purple-500/40 text-purple-200 hover:text-white transition flex items-center justify-center gap-2 text-sm font-semibold"
+            className="p-3 sm:p-4 rounded-xl sm:rounded-2xl bg-purple-900/50 hover:bg-purple-800/60 border border-purple-500/40 text-purple-200 hover:text-white transition flex items-center justify-center"
             title="Personalizar a Mari"
           >
-            <User className="w-5 h-5 text-purple-300" />
-            <span className="sm:hidden">Estilo</span>
+            <User className="w-4 sm:w-5 h-4 sm:h-5 text-purple-300" />
           </button>
 
           <button
@@ -155,23 +162,22 @@ export const TitleScreen: React.FC<TitleScreenProps> = ({
               sound.playClick();
               setShowStoryModal(true);
             }}
-            className="w-full sm:w-auto p-4 rounded-2xl bg-purple-900/50 hover:bg-purple-800/60 border border-purple-500/40 text-purple-200 hover:text-white transition flex items-center justify-center gap-2 text-sm font-semibold"
+            className="p-3 sm:p-4 rounded-xl sm:rounded-2xl bg-purple-900/50 hover:bg-purple-800/60 border border-purple-500/40 text-purple-200 hover:text-white transition flex items-center justify-center"
             title="Historia y Prólogo"
           >
-            <BookOpen className="w-5 h-5 text-pink-300" />
-            <span className="sm:hidden">Historia</span>
+            <BookOpen className="w-4 sm:w-5 h-4 sm:h-5 text-pink-300" />
           </button>
         </div>
 
         {hasSavedProgress && (
-          <div className="mt-4 text-xs text-yellow-300/90 font-medium">
+          <div className="mt-2 sm:mt-4 text-[11px] sm:text-xs text-yellow-300/90 font-medium">
             Progreso guardado: <span className="font-bold">{starCount} de 7 estrellas</span> recuperadas
           </div>
         )}
       </div>
 
-      {/* Bottom Control Hint Line */}
-      <div className="relative z-10 text-center">
+      {/* Bottom Control Hint Line (Desktop only) */}
+      <div className="relative z-10 text-center hidden md:block pt-2">
         <p className="text-[11px] md:text-xs text-purple-300/70 tracking-wide font-mono">
           WASD Mover · Shift Correr · Espacio Saltar · E Interactuar · Esc Menú
         </p>
