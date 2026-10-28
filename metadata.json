@@ -1,0 +1,6 @@
+{
+  "name": "BTS Mystery: El secreto de las siete puertas",
+  "description": "Videojuego 3D de aventura, misterio y acertijos de Mari en el universo púrpura de BTS",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
